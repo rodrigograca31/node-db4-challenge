@@ -11,7 +11,8 @@ CREATE TABLE ingredients (
 
 CREATE TABLE recipe_ingredients (
 	recipe_id INTEGER REFERENCES recipes (id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL, 
-	ingredient_id INTEGER REFERENCES ingredients (id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL
+	ingredient_id INTEGER REFERENCES ingredients (id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL,
+	CONSTRAINT [PK_recipe_ingredients] PRIMARY KEY (ingredient_id, recipe_id)
 );
 
 CREATE TABLE steps (

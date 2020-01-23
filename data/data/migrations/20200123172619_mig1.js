@@ -42,6 +42,8 @@ exports.up = function(knex) {
 				.inTable("ingredients")
 				.onDelete("CASCADE")
 				.onUpdate("CASCADE");
+
+			tbl.primary(["recipe_id", "ingredient_id"]);
 		});
 };
 
