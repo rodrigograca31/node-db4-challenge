@@ -7,6 +7,23 @@ const getAll = () => {
 const getById = id => {
 	return DB(TABLE).where({ id });
 };
+const getShoppingList = id => {
+	return DB(TABLE)
+		.column("ingredients.name", "ingredients.quantity")
+		.where(TABLE + ".id", "=", id)
+		.join(
+			"recipe_ingredients",
+			"recipe_ingredients.recipe_id",
+			"=",
+			TABLE + ".id"
+		)
+		.join(
+			"ingredients",
+			"recipe_ingredients.ingredient_id",
+			"=",
+			"ingredients.id"
+		);
+};
 
 const insert = fields => {
 	return DB(TABLE).insert(fields);
@@ -29,5 +46,6 @@ module.exports = {
 	insert,
 	update,
 	deleteEntry,
-	getById
+	getById,
+	getShoppingList
 };

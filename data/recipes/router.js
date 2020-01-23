@@ -29,6 +29,21 @@ router.get("/:id", (req, res) => {
 			res.status(500).json({ message: "error" });
 		});
 });
+router.get("/:id/shoppingList", (req, res) => {
+	Recipes.getShoppingList(req.params.id)
+		.then(result => {
+			res.json(result);
+			return true;
+			if (result) {
+				res.json(result);
+			} else {
+				res.json({});
+			}
+		})
+		.catch(err => {
+			res.status(500).json({ message: "error" });
+		});
+});
 
 router.post("/", (req, res) => {
 	Recipes.insert(req.body)
