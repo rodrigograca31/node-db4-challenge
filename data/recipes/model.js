@@ -25,6 +25,14 @@ const getShoppingList = id => {
 		);
 };
 
+const getInstructions = id => {
+	return DB(TABLE)
+		.column("steps.step")
+		.where(TABLE + ".id", "=", id)
+		.join("steps", TABLE + ".id", "=", "steps.recipe_id")
+		.orderBy("steps.id", "asc");
+};
+
 const insert = fields => {
 	return DB(TABLE).insert(fields);
 };
@@ -47,5 +55,6 @@ module.exports = {
 	update,
 	deleteEntry,
 	getById,
-	getShoppingList
+	getShoppingList,
+	getInstructions
 };
